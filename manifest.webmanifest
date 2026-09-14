@@ -1,1 +1,38 @@
-{"name":"Larache XYZ","short_name":"Larache XYZ","description":"Larache XYZ — حلول رقمية احترافية وتصميم وتطوير المواقع والمتاجر.","lang":"ar","dir":"rtl","start_url":"/dev-v2/","scope":"/dev-v2/","display":"standalone","background_color":"#0f172a","theme_color":"#2563eb","icons":[{"src":"/dev-v2/favicon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}],"shortcuts":[{"name":"الخدمات","url":"/dev-v2/#services","icons":[{"src":"/dev-v2/favicon.svg","sizes":"any","type":"image/svg+xml"}]},{"name":"اتصل بنا","url":"/dev-v2/#contact","icons":[{"src":"/dev-v2/favicon.svg","sizes":"any","type":"image/svg+xml"}]}]}
+{
+  "name": "LARACHE WEB DEV",
+  "short_name": "LARACHE WEB DEV",
+  "description": "LARACHE WEB DEV — تصميم وتطوير المواقع والحلول الرقمية.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "/dev-v2/",
+  "scope": "/dev-v2/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/gpldroid/dev/main/LARACHE%20LOGO.webp",
+      "sizes": "1024x559",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/dev-v2/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "الخدمات",
+      "url": "/dev-v2/#services",
+      "icons": [{"src": "https://raw.githubusercontent.com/gpldroid/dev/main/LARACHE%20LOGO.webp", "sizes": "1024x559", "type": "image/png"}]
+    },
+    {
+      "name": "اتصل بنا",
+      "url": "/dev-v2/#contact",
+      "icons": [{"src": "https://raw.githubusercontent.com/gpldroid/dev/main/LARACHE%20LOGO.webp", "sizes": "1024x559", "type": "image/png"}]
+    }
+  ]
+}
