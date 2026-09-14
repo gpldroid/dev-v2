@@ -4,20 +4,14 @@
   "description": "LARACHE WEB DEV — تصميم وتطوير المواقع والحلول الرقمية.",
   "lang": "ar",
   "dir": "rtl",
-  "start_url": "/dev-v2/",
-  "scope": "/dev-v2/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#0f172a",
   "icons": [
     {
-      "src": "https://raw.githubusercontent.com/gpldroid/dev/main/LARACHE%20LOGO.webp",
-      "sizes": "1024x559",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/dev-v2/favicon.svg",
+      "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
@@ -26,13 +20,11 @@
   "shortcuts": [
     {
       "name": "الخدمات",
-      "url": "/dev-v2/#services",
-      "icons": [{"src": "https://raw.githubusercontent.com/gpldroid/dev/main/LARACHE%20LOGO.webp", "sizes": "1024x559", "type": "image/png"}]
+      "url": "/#services"
     },
     {
       "name": "اتصل بنا",
-      "url": "/dev-v2/#contact",
-      "icons": [{"src": "https://raw.githubusercontent.com/gpldroid/dev/main/LARACHE%20LOGO.webp", "sizes": "1024x559", "type": "image/png"}]
+      "url": "/#contact"
     }
   ]
 }
