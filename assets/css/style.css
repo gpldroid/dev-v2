@@ -1683,3 +1683,9 @@ body:has(.cookie-consent.needs-choice) {
     transform: none;
   }
 }
+
+/* Performance: skip layout/paint work for sections outside the initial viewport. */
+main > .section:not(#home){content-visibility:auto;contain-intrinsic-size:800px auto;}
+/* Keep icon fonts from delaying text/icon fallback rendering. */
+.fa-solid,.fa-brands{font-display:swap;}
+@media (max-width:980px){.hero-logo{content-visibility:auto;contain-intrinsic-size:220px auto;}}
