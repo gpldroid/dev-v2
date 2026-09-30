@@ -38,7 +38,7 @@ FONTS IMPORT & ROOT VARIABLES
 --brand-hover: #1d4ed8;
 --brand-accent: #06b6d4;
 --brand-gradient: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
---brand-glow: rgba(37, 99, 235, 0.15);
+--brand-glow: rgba(37, 99, 235, 0.12);
 
 /* Shadows & Glassmorphism */
 --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -55,8 +55,8 @@ FONTS IMPORT & ROOT VARIABLES
 --container-max: 1200px;
 }
 
-/* Dark Theme Overrides */
-[data-theme="dark"] {
+/* Dark Theme Overrides (Controlled via html.dark in app.js) */
+html.dark {
 --bg-main: #0b1220;
 --bg-card: #111a2e;
 --bg-alt: #0e1628;
@@ -74,7 +74,7 @@ FONTS IMPORT & ROOT VARIABLES
 --brand-hover: #60a5fa;
 --brand-accent: #22d3ee;
 --brand-gradient: linear-gradient(135deg, #3b82f6 0%, #22d3ee 100%);
---brand-glow: rgba(59, 130, 246, 0.25);
+--brand-glow: rgba(59, 130, 246, 0.2);
 
 --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
 --shadow-md: 0 10px 30px -5px rgba(0, 0, 0, 0.4);
@@ -163,7 +163,7 @@ transition: top 0.2s ease;
 top: 1rem;
 }
 
-/* Scroll Progress Bar */
+/* Scroll Progress Bar (Controlled via #progress in app.js) */
 .progress {
 position: fixed;
 top: 0;
@@ -174,6 +174,8 @@ background: var(--brand-gradient);
 z-index: 10001;
 transform-origin: right;
 pointer-events: none;
+width: 0%;
+transition: width 0.1s linear;
 }
 
 .container {
@@ -319,6 +321,7 @@ transform: translateY(-2px);
 display: none;
 }
 
+/* Mobile Nav Menu (Controlled via #mobileNav.open in app.js) */
 .mobile-nav {
 display: none;
 flex-direction: column;
@@ -329,7 +332,7 @@ border-bottom: 1px solid var(--border-color);
 box-shadow: var(--shadow-md);
 }
 
-.mobile-nav.is-open {
+.mobile-nav.open {
 display: flex;
 }
 
@@ -340,7 +343,8 @@ color: var(--text-primary);
 border-radius: var(--radius-sm);
 }
 
-.mobile-nav a:hover {
+.mobile-nav a:hover,
+.mobile-nav a.active {
 background: var(--bg-alt);
 color: var(--brand-primary);
 }
@@ -726,7 +730,7 @@ margin-top: auto;
 }
 
 /* ==========================================================================
-9. FAQ ACCORDION
+9. FAQ ACCORDION (Controlled via .faq-item.open in app.js)
 ========================================================================== */
 .faq {
 max-width: 800px;
@@ -763,22 +767,18 @@ color: var(--brand-primary);
 transition: transform 0.3s ease;
 }
 
-.faq-item.is-active .faq-q i {
-transform: rotate(45deg);
-}
-
 .faq-a {
 max-height: 0;
 overflow: hidden;
-transition: max-height 0.3s cubic-bezier(0, 1, 0, 1), padding 0.3s ease;
+transition: max-height 0.35s cubic-bezier(0, 1, 0, 1), padding 0.35s ease;
 padding: 0 1.5rem;
 background: var(--bg-alt);
 }
 
-.faq-item.is-active .faq-a {
+.faq-item.open .faq-a {
 max-height: 500px;
 padding: 1rem 1.5rem 1.5rem;
-transition: max-height 0.3s cubic-bezier(1, 0, 1, 0), padding 0.3s ease;
+transition: max-height 0.35s cubic-bezier(1, 0, 1, 0), padding 0.35s ease;
 }
 
 .faq-a p {
@@ -923,21 +923,22 @@ width: 100%;
 }
 
 /* ==========================================================================
-12. FLOATING BUTTONS & SCROLL TO TOP
-========================================================================== */
+12. FLOATING BUTTONS & SCROLL CONTROLS (Controlled via app.js)
+========================================================================== /
+/ Floating WhatsApp Button */
 .float-wa {
 position: fixed;
 bottom: 24px;
 left: 24px;
-width: 54px;
-height: 54px;
+width: 52px;
+height: 52px;
 background: #25d366;
 color: #fff;
 border-radius: var(--radius-full);
 display: flex;
 align-items: center;
 justify-content: center;
-font-size: 1.8rem;
+font-size: 1.75rem;
 box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
 z-index: 990;
 transition: var(--transition);
@@ -949,14 +950,33 @@ color: #fff;
 box-shadow: 0 12px 25px rgba(37, 211, 102, 0.6);
 }
 
-/* Scroll To Top Button (تنسيق زر العودة للأعلى) */
-.scroll-top,
-#scrollTop {
+/* Scroll Controls Container (Created dynamically in app.js) */
+.scroll-controls {
 position: fixed;
 bottom: 88px;
 left: 24px;
-width: 48px;
-height: 48px;
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
+z-index: 989;
+opacity: 0;
+visibility: hidden;
+transform: translateY(15px);
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+pointer-events: none;
+}
+
+.scroll-controls.visible {
+opacity: 1;
+visibility: visible;
+transform: translateY(0);
+pointer-events: auto;
+}
+
+/* Individual Scroll Control Button (#scrollTopBtn & #scrollDownBtn) */
+.scroll-control {
+width: 44px;
+height: 44px;
 background: var(--bg-card);
 color: var(--text-primary);
 border: 1px solid var(--border-color);
@@ -964,31 +984,20 @@ border-radius: var(--radius-full);
 display: flex;
 align-items: center;
 justify-content: center;
-font-size: 1.2rem;
+font-size: 1rem;
 box-shadow: var(--shadow-md);
-z-index: 989;
 cursor: pointer;
-opacity: 0;
-visibility: hidden;
 transition: var(--transition);
 }
 
-.scroll-top.is-visible,
-#scrollTop.is-visible,
-.scroll-top.active,
-#scrollTop.active {
-opacity: 1;
-visibility: visible;
-}
-
-.scroll-top:hover,
-#scrollTop:hover {
+.scroll-control:hover {
 background: var(--brand-glow);
 color: var(--brand-primary);
 border-color: var(--brand-primary);
-transform: translateY(-4px);
+transform: scale(1.08);
 }
 
+/* Footer Section */
 .footer {
 background: var(--bg-card);
 border-top: 1px solid var(--border-color);
@@ -1034,13 +1043,14 @@ border-color: var(--brand-primary);
 }
 
 /* ==========================================================================
-13. COOKIES CONSENT SYSTEM (CONSENT.JS)
+13. COOKIES CONSENT SYSTEM (Controlled via consent.js)
 ========================================================================== */
 #cookieConsent {
 font-family: var(--font-main);
 direction: rtl;
 }
 
+/* Cookie Banner at Bottom */
 .cookie-banner {
 display: none;
 position: fixed;
@@ -1136,6 +1146,7 @@ background: var(--brand-primary);
 color: #fff;
 }
 
+/* Cookie Settings Modal */
 .cookie-modal {
 position: fixed;
 inset: 0;
@@ -1258,6 +1269,7 @@ gap: 0.75rem;
 flex-wrap: wrap;
 }
 
+/* Floating Cookie Gear Manage Button */
 .cookie-manage {
 position: fixed;
 bottom: 24px;
