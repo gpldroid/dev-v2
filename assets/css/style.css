@@ -510,6 +510,7 @@ font-weight: 600;
 ========================================================================== */
 .section {
 padding: 5rem 0;
+  border:0.5px solid black;
 }
 
 .section.alt {
